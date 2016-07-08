@@ -4,47 +4,76 @@
       tr.folders
         th.no-fold( colspan="2" )
           | &nbsp;
-        th.folder
-          img.minus-sign( src="img/minus-sign.png" )
-        th.folder( colspan="5" )
-          img.minus-sign( src="img/minus-sign.png" )
+
+        if statusVisible
+          th.folder
+            img.minus-sign.status-block( src="img/minus-sign.png" )
+        else
+          th.folder
+            img.plus-sign.status-block( src="img/plus-sign.png" )
+
+        if costsVisible
+          th.folder( colspan="5" )
+            img.minus-sign.costs-block( src="img/minus-sign.png" )
+        else
+          th.folder
+            img.plus-sign.costs-block( src="img/plus-sign.png" )
 
         for goal in goals
-          th.folder( colspan="#{goal.numParams}" )
-            img.minus-sign( src="img/minus-sign.png" )
+          if goal.visible
+            th.folder( colspan="#{goal.numParams}" )
+              img.minus-sign( src="img/minus-sign.png", class="block-#{goal.goal_id}" )
+          else
+            th.folder
+              img.plus-sign( src="img/plus-sign.png", class="block-#{goal.goal_id}" )
 
       tr
         th( rowspan="2" )
           | &nbsp;
         th( rowspan="2" )
           | КАМПАНИИ
-        th( rowspan="2" ).start-of-block.end-of-block
-          | Статус
-        th( rowspan="2" ).start-of-block
-          | Показы
-        th( rowspan="2" )
-          | Клики
-        th( rowspan="2" )
-          | CTR
-        th( rowspan="2" )
-          | CPC
-        th( rowspan="2" ).end-of-blocks
-          | Затраты
+
+        if statusVisible
+          th( rowspan="2" ).start-of-block.end-of-block
+            | Статус
+        else
+          th( rowspan="2" ).start-of-block.end-of-block
+            | &#8212;
+        if costsVisible
+          th( rowspan="2" ).start-of-block
+            | Показы
+          th( rowspan="2" )
+            | Клики
+          th( rowspan="2" )
+            | CTR
+          th( rowspan="2" )
+            | CPC
+          th( rowspan="2" ).end-of-blocks
+            | Затраты
+        else
+          th( rowspan="2" ).start-of-block.end-of-blocks
+            | &#8212;
 
         for goal in goals
-          th( colspan="#{goal.numParams}").start-of-block.end-of-block
-            .goal-name
-              | #{goal.name}
-            .goal-id
-              |  &#8212; Цель #{goal.goal_id} &#8212;
+          if goal.visible
+            th( colspan="#{goal.numParams}").start-of-block.end-of-block
+              .goal-name
+                | #{goal.name}
+              .goal-id
+                |  &#8212; Цель #{goal.goal_id} &#8212;
+          else
+            th( rowspan="2").start-of-block.end-of-block
+              | &#8212;
+
       tr
         for goal in goals
-          th.start-of-block
-            | CPA, р.
-          th
-            | CR, %
-          th.end-of-block
-            | Кол-во
+          if goal.visible
+            th.start-of-block
+              | CPA, р.
+            th
+              | CR, %
+            th.end-of-block
+              | Кол-во
 
       tr.total
     tbody.items

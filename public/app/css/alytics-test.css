@@ -104,7 +104,8 @@ td {
   .folder .minus-sign {
     position: relative;
     top: -9px;
-    background: url(../../img/background.png); }
+    background: url(../../img/background.png);
+    cursor: pointer; }
 
 .start-of-block {
   border-left-width: 2px;
@@ -120,6 +121,7 @@ td:last-of-type.end-of-block {
   border-right-color: #d3d7da; }
 
 .campaign {
+  height: 38px;
   font-size: 11pt;
   color: #424242;
   background: white; }

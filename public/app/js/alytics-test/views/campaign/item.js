@@ -54,7 +54,6 @@
         clicks: utils.formatNumber(data.costs.clicks)
       };
       data.costs = costs;
-      console.log(this.model.attributes);
       goals = [];
       _ref1 = data.goals;
       for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
@@ -62,10 +61,13 @@
         goals.push({
           cpa: utils.formatNumber(goal.cr, this.numFractionalDigits.cpa),
           cr: utils.formatNumber(goal.cr, this.numFractionalDigits.cr),
-          count: utils.formatNumber(goal.count)
+          count: utils.formatNumber(goal.count),
+          visible: window.bootstrapData.campaign_blocks_visibility.goals[goal.goal_id]
         });
       }
       data.goals = goals;
+      data.statusVisible = window.bootstrapData.campaign_blocks_visibility.status;
+      data.costsVisible = window.bootstrapData.campaign_blocks_visibility.costs;
       data.total = data.value === 'Total' ? 'total' : '';
       return data;
     };

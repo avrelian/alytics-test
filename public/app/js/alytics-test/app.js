@@ -27,9 +27,7 @@
       window.alyticsTestDB.campaigns = new AlyticsTest.Campaign.Collection;
       window.alyticsTestDB.campaigns.reset(window.bootstrapData.content);
       window.alyticsTestDB.goals = new AlyticsTest.Goal.Collection;
-      window.alyticsTestDB.goals.reset(window.bootstrapData.goals_list);
-      console.log(window.alyticsTestDB.campaigns);
-      return console.log(window.alyticsTestDB.goals);
+      return window.alyticsTestDB.goals.reset(window.bootstrapData.goals_list);
     };
 
     App.prototype.cacheUI = function() {

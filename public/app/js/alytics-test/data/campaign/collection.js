@@ -26,9 +26,6 @@
         subTotal.costs.shows += campaignCosts.shows;
         subTotal.costs.cost += campaignCosts.cost;
         _.each(campaign.attributes.goals, function(goal, i) {
-          if (subTotal.goals[i].name !== goal.name) {
-            throw new Error('Ошибка в подсчете ИТОГО по целям: разные индексы в массивах');
-          }
           return subTotal.goals[i].count += goal.count;
         });
         return subTotal;
@@ -48,6 +45,7 @@
             goal = _ref1[_i];
             _results.push({
               name: goal.name,
+              goal_id: goal.goal_id,
               count: 0
             });
           }

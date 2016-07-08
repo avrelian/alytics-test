@@ -19,9 +19,6 @@ class AlyticsTest.App extends Backbone.View
     window.alyticsTestDB.goals = new AlyticsTest.Goal.Collection
     window.alyticsTestDB.goals.reset(window.bootstrapData.goals_list)
 
-    console.log(window.alyticsTestDB.campaigns)
-    console.log(window.alyticsTestDB.goals)
-
   cacheUI: ->
     @$campaigns = $('.campaigns.placeholder')
 

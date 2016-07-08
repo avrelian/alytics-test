@@ -36,17 +36,19 @@ class AlyticsTest.Views.Campaign.Item extends Backbone.View
 
     data.costs = costs
 
-    console.log(@model.attributes)
-
     goals = []
     for goal in data.goals
       goals.push(
         cpa: utils.formatNumber(goal.cr, @numFractionalDigits.cpa)
         cr: utils.formatNumber(goal.cr, @numFractionalDigits.cr)
         count: utils.formatNumber(goal.count)
+        visible: window.bootstrapData.campaign_blocks_visibility.goals[goal.goal_id]
       )
 
     data.goals = goals
+
+    data.statusVisible = window.bootstrapData.campaign_blocks_visibility.status
+    data.costsVisible = window.bootstrapData.campaign_blocks_visibility.costs
 
     data.total = if data.value == 'Total' then 'total' else ''
 

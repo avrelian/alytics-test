@@ -41,6 +41,7 @@ generateCampaignGoalInfo = (goal, cost, clicks) ->
   cpa: cost / count
   cr: 100 * count / clicks
   name: goal.name
+  goal_id: goal.goal_id
 
 generateCosts = (cost, clicks) ->
   shows = generateShows()
@@ -60,6 +61,46 @@ generateCampaign = (id, cost, clicks) ->
 window.bootstrapData = {}
 window.bootstrapData.goals_list = (generateGoal(id) for id in [0...numGoals])
 window.bootstrapData.content = (generateCampaign(id, generateCost(), generateClicks()) for id in [0...numCampaigns])
-window.bootstrapData.campaign_visibility = {}
+window.bootstrapData.campaign_blocks_visibility =
+  status: true
+  costs: true
+  goals:
+    0: true
+    1: true
+    2: true
+    3: true
+    4: true
+window.bootstrapData.campaign_fields_visibility =
+  "content-stat":
+    shows: true
+    clicks: true
+    ctr: true
+    cpc: true
+    cost: true
+    bounce_rate: false
+    average_time: false
+    pages_per_visit: false
+    new_visits: false
+    sessions: false
+  "goal-0":
+    count: true
+    cpa: true
+    cr: true
+  "goal-1":
+    count: true
+    cpa: true
+    cr: true
+  "goal-2":
+    count: true
+    cpa: true
+    cr: true
+  "goal-3":
+    count: true
+    cpa: true
+    cr: true
+  "goal-4":
+    count: true
+    cpa: true
+    cr: true
 
 console.log(window.bootstrapData)

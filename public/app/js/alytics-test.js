@@ -44,9 +44,7 @@
       window.alyticsTestDB.campaigns = new AlyticsTest.Campaign.Collection;
       window.alyticsTestDB.campaigns.reset(window.bootstrapData.content);
       window.alyticsTestDB.goals = new AlyticsTest.Goal.Collection;
-      window.alyticsTestDB.goals.reset(window.bootstrapData.goals_list);
-      console.log(window.alyticsTestDB.campaigns);
-      return console.log(window.alyticsTestDB.goals);
+      return window.alyticsTestDB.goals.reset(window.bootstrapData.goals_list);
     };
 
     App.prototype.cacheUI = function() {
@@ -99,9 +97,6 @@
         subTotal.costs.shows += campaignCosts.shows;
         subTotal.costs.cost += campaignCosts.cost;
         _.each(campaign.attributes.goals, function(goal, i) {
-          if (subTotal.goals[i].name !== goal.name) {
-            throw new Error('Ошибка в подсчете ИТОГО по целям: разные индексы в массивах');
-          }
           return subTotal.goals[i].count += goal.count;
         });
         return subTotal;
@@ -121,6 +116,7 @@
             goal = _ref3[_i];
             _results.push({
               name: goal.name,
+              goal_id: goal.goal_id,
               count: 0
             });
           }
@@ -241,7 +237,6 @@
         clicks: utils.formatNumber(data.costs.clicks)
       };
       data.costs = costs;
-      console.log(this.model.attributes);
       goals = [];
       _ref7 = data.goals;
       for (_i = 0, _len = _ref7.length; _i < _len; _i++) {
@@ -249,10 +244,13 @@
         goals.push({
           cpa: utils.formatNumber(goal.cr, this.numFractionalDigits.cpa),
           cr: utils.formatNumber(goal.cr, this.numFractionalDigits.cr),
-          count: utils.formatNumber(goal.count)
+          count: utils.formatNumber(goal.count),
+          visible: window.bootstrapData.campaign_blocks_visibility.goals[goal.goal_id]
         });
       }
       data.goals = goals;
+      data.statusVisible = window.bootstrapData.campaign_blocks_visibility.status;
+      data.costsVisible = window.bootstrapData.campaign_blocks_visibility.costs;
       data.total = data.value === 'Total' ? 'total' : '';
       return data;
     };
@@ -275,6 +273,8 @@
     __extends(List, _super);
 
     function List() {
+      this.onMinusSignClick = __bind(this.onMinusSignClick, this);
+      this.onPlusSignClick = __bind(this.onPlusSignClick, this);
       this.appendOne = __bind(this.appendOne, this);
       _ref7 = List.__super__.constructor.apply(this, arguments);
       return _ref7;
@@ -284,14 +284,13 @@
 
     List.prototype.template = JST['alytics-test/campaign/list'];
 
+    List.prototype.events = {
+      'click .plus-sign': 'onPlusSignClick',
+      'click .minus-sign': 'onMinusSignClick'
+    };
+
     List.prototype.initialize = function() {
-      this.render();
-      this.cacheUI();
-      this.appendItems();
-      return new AlyticsTest.Views.Campaign.Item({
-        el: this.$total,
-        model: new AlyticsTest.Campaign.Model(this.collection.getTotal())
-      });
+      return this.render();
     };
 
     List.prototype.render = function() {
@@ -299,6 +298,12 @@
       outerEl = $(this.template(this.serializeData()));
       this.$el.replaceWith(outerEl);
       this.setElement(outerEl);
+      this.cacheUI();
+      this.appendItems();
+      new AlyticsTest.Views.Campaign.Item({
+        el: this.$total,
+        model: new AlyticsTest.Campaign.Model(this.collection.getTotal())
+      });
       return this;
     };
 
@@ -307,22 +312,18 @@
     };
 
     List.prototype.serializeData = function() {
-      var data, goal, i, numParams, param, _i, _len, _ref8;
+      var data, goal, i, _i, _len, _ref8;
       data = this.collection.toJSON();
       data.goals = data[0].goals.slice(0);
       _ref8 = data.goals;
       for (i = _i = 0, _len = _ref8.length; _i < _len; i = ++_i) {
         goal = _ref8[i];
-        numParams = -1;
-        for (param in goal) {
-          numParams += 1;
-        }
-        goal.numParams = numParams;
-        if (goal.name !== window.alyticsTestDB.goals.models[i].attributes.name) {
-          throw new Error('');
-        }
+        goal.numParams = 3;
         goal.goal_id = window.alyticsTestDB.goals.models[i].attributes.goal_id;
+        goal.visible = window.bootstrapData.campaign_blocks_visibility.goals[goal.goal_id];
       }
+      data.statusVisible = window.bootstrapData.campaign_blocks_visibility.status;
+      data.costsVisible = window.bootstrapData.campaign_blocks_visibility.costs;
       return data;
     };
 
@@ -339,6 +340,36 @@
         parentView: this
       });
       return this.$items.append(campaignView.$el);
+    };
+
+    List.prototype.onPlusSignClick = function(event) {
+      var goal, prop;
+      for (prop in window.bootstrapData.campaign_blocks_visibility) {
+        if (event.target.classList.contains("" + prop + "-block")) {
+          window.bootstrapData.campaign_blocks_visibility[prop] = true;
+        }
+      }
+      for (goal in window.bootstrapData.campaign_blocks_visibility.goals) {
+        if (event.target.classList.contains("block-" + goal)) {
+          window.bootstrapData.campaign_blocks_visibility.goals[goal] = true;
+        }
+      }
+      return this.render();
+    };
+
+    List.prototype.onMinusSignClick = function(event) {
+      var goal, prop;
+      for (prop in window.bootstrapData.campaign_blocks_visibility) {
+        if (event.target.classList.contains("" + prop + "-block")) {
+          window.bootstrapData.campaign_blocks_visibility[prop] = false;
+        }
+      }
+      for (goal in window.bootstrapData.campaign_blocks_visibility.goals) {
+        if (event.target.classList.contains("block-" + goal)) {
+          window.bootstrapData.campaign_blocks_visibility.goals[goal] = false;
+        }
+      }
+      return this.render();
     };
 
     return List;

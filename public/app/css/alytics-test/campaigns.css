@@ -23,7 +23,8 @@
   .folder .minus-sign {
     position: relative;
     top: -9px;
-    background: url(../../img/background.png); }
+    background: url(../../img/background.png);
+    cursor: pointer; }
 
 .start-of-block {
   border-left-width: 2px;

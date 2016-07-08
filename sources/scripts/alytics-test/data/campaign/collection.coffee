@@ -14,9 +14,6 @@ class AlyticsTest.Campaign.Collection extends Backbone.Collection
       subTotal.costs.cost += campaignCosts.cost
 
       _.each(campaign.attributes.goals, (goal, i) ->
-        # TODO: удалить к продакшену
-        if subTotal.goals[i].name != goal.name
-          throw new Error('Ошибка в подсчете ИТОГО по целям: разные индексы в массивах')
         subTotal.goals[i].count += goal.count
       )
 
@@ -28,7 +25,7 @@ class AlyticsTest.Campaign.Collection extends Backbone.Collection
         clicks: 0
         shows: 0
         cost: 0
-      goals: ({name: goal.name, count: 0} for goal in @models[0].attributes.goals)
+      goals: ({name: goal.name, goal_id: goal.goal_id, count: 0} for goal in @models[0].attributes.goals)
     , @)
 
     total.costs.cpc = total.costs.cost / total.costs.clicks
