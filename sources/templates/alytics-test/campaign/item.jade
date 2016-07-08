@@ -1,0 +1,35 @@
+tr.campaign( class="#{total}" )
+  td
+    input.select-campaign( type="checkbox" )
+  td.campaign-value
+    if total
+      | #{value}
+    else
+      a.campaign-value-link( href="#" )
+        | #{value}
+      .edit-button
+        img( src="img/edit-button.png" )
+  td.campaign-status.start-of-block.end-of-block
+    if status
+      img( src="img/#{status}-campaign.png" )
+  td.start-of-block
+    | #{costs.shows}
+  td
+    | #{costs.clicks}
+  td
+    | #{costs.ctr}%
+  td
+    | #{costs.cpc}
+  td.end-of-block
+    | #{costs.cost}
+
+  for goal in goals
+    td.start-of-block
+      | #{goal.cpa}
+    td
+      | #{goal.cr}%
+    td.end-of-block
+      | #{goal.count}
+
+
+

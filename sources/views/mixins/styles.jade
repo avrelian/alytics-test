@@ -1,0 +1,8 @@
+mixin styles(styles)
+  - styles.app || (styles = {app: styles});
+  - styles.app instanceof Array || (styles.app = [styles.app]);
+  - styles.vendor || (styles.vendor = []);
+
+  each origin in ['vendor', 'app']
+    each style in styles[origin]
+      link(rel='stylesheet', href='#{origin}/css/#{style}.css')

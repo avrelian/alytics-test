@@ -1,0 +1,8 @@
+/node_modules/
+/.idea/
+/public/
+/task/
+/*.js
+/.sass-cache/
+tmp/
+.notes

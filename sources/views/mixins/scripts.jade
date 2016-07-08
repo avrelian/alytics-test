@@ -1,0 +1,8 @@
+mixin scripts(scripts)
+  - scripts.app || (scripts = {app: scripts});
+  - scripts.app instanceof Array || (scripts.app = [scripts.app]);
+  - scripts.vendor || (scripts.vendor = []);
+
+  each origin in ['vendor', 'app']
+    each script in scripts[origin]
+      script(src='#{origin}/js/#{script}.js')

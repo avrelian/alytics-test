@@ -1,0 +1,28 @@
+include ../mixins/styles
+include ../mixins/scripts
+
+- var lang = "ru";
+- var title = "Alytics Test";
+- var styles = {};
+- styles.app = ['alytics-test'];
+- var scripts = {};
+- scripts.vendor = ['jquery', 'underscore', 'backbone', 'jade.runtime'];
+- scripts.app = ['utils', 'widgets', 'templates', 'alytics-test'];
+
+
+!!! 5
+html(lang="#{lang}")
+  head
+    meta( charset="utf-8" )
+    +styles(styles)
+    title #{title}
+    block head
+
+  body#app
+
+    .page-main
+      .page-content
+        block content
+
+    include ../../../bootstrap-data.js
+    +scripts(scripts)

@@ -1,0 +1,21 @@
+{
+  "name": "alytics-test",
+  "version": "0.1.0",
+  "description": "alytics-test",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sergey Radchenko",
+  "license": "copyrighted",
+  "dependencies": {
+    "grunt": "~0.4.0",
+    "coffee-script": "~1.6.3",
+    "jade": "~0.35.0",
+    "grunt-contrib-jade": "~0.8.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-sass": "~0.5.1",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-shell": "~0.6.1"
+  }
+}
