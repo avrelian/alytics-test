@@ -1,0 +1,150 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none; }
+
+ins {
+  text-decoration: none; }
+
+del {
+  text-decoration: line-through; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+html,
+body,
+.page-main {
+  height: 100%;
+  width: 100%;
+  background: url(../../img/background.png); }
+
+.page-content {
+  height: 100%;
+  width: 100%; }
+
+td,
+th {
+  border: 1px solid #d3d7da;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  padding: 3px 5px; }
+
+th {
+  text-align: center;
+  background: linear-gradient(to top, #efefef, #f9f9f9); }
+
+td {
+  text-align: right; }
+
+.campaigns {
+  width: 1200px;
+  margin: 40px auto;
+  overflow-x: scroll; }
+  .campaigns .campaigns-table {
+    margin: 20px auto;
+    min-width: 1000px; }
+  .campaigns .goal-name {
+    font-size: 12pt;
+    color: #940d3d; }
+  .campaigns .goal-id {
+    font-size: 11pt;
+    color: #878787; }
+
+.no-fold {
+  border: 0;
+  padding: 0; }
+
+.folder {
+  border: 1px dotted gray;
+  padding: 0; }
+  .folder .plus-sign,
+  .folder .minus-sign {
+    position: relative;
+    top: -9px;
+    background: url(../../img/background.png); }
+
+.start-of-block {
+  border-left-width: 2px;
+  border-left-color: #434343; }
+
+.end-of-block {
+  border-right-width: 2px;
+  border-right-color: #434343; }
+
+th:last-of-type.end-of-block,
+td:last-of-type.end-of-block {
+  border-right-width: 1px;
+  border-right-color: #d3d7da; }
+
+.campaign {
+  font-size: 11pt;
+  color: #424242;
+  background: white; }
+  .campaign:nth-child(even) {
+    background: whitesmoke; }
+  .campaign.total {
+    background: #e2ebf2; }
+  .campaign .campaign-value {
+    position: relative;
+    white-space: nowrap;
+    max-width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 11pt;
+    color: #577da0;
+    text-align: left; }
+    .campaign .campaign-value .campaign-value-link {
+      color: inherit; }
+    .campaign .campaign-value .edit-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: none;
+      opacity: 0.6; }
+  .campaign .campaign-status {
+    text-align: center; }
+  .campaign.show-edit-button .edit-button {
+    display: block; }

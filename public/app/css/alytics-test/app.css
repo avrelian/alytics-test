@@ -1,0 +1,25 @@
+html,
+body,
+.page-main {
+  height: 100%;
+  width: 100%;
+  background: url(../../img/background.png); }
+
+.page-content {
+  height: 100%;
+  width: 100%; }
+
+td,
+th {
+  border: 1px solid #d3d7da;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  padding: 3px 5px; }
+
+th {
+  text-align: center;
+  background: linear-gradient(to top, #efefef, #f9f9f9); }
+
+td {
+  text-align: right; }

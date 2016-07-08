@@ -1,0 +1,122 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><link rel="stylesheet" href="app/css/alytics-test.css"/><title>Alytics Test</title></head><body id="app"><div class="page-main"><div class="page-content"><div class="campaigns placeholder"></div></div></div><script type="text/javascript">
+(function() {
+  var bounds, generateCampaign, generateCampaignGoalInfo, generateClicks, generateCost, generateCosts, generateCount, generateGoal, generateShows, id, numCampaigns, numGoals, random;
+
+  numGoals = 5;
+
+  numCampaigns = 10;
+
+  bounds = {
+    cost: {
+      min: 10,
+      max: 10000
+    },
+    clicks: {
+      min: 10,
+      max: 1000
+    },
+    shows: {
+      min: 10,
+      max: 10000
+    },
+    count: {
+      min: 10,
+      max: 100
+    }
+  };
+
+  random = function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  generateCost = function() {
+    return random(bounds.cost.min, bounds.cost.max);
+  };
+
+  generateClicks = function() {
+    return random(bounds.clicks.min, bounds.clicks.max);
+  };
+
+  generateShows = function() {
+    return random(bounds.shows.min, bounds.shows.max);
+  };
+
+  generateCount = function() {
+    return random(bounds.count.min, bounds.count.max);
+  };
+
+  generateGoal = function(id) {
+    return {
+      goal_id: id,
+      name: "Цель " + id
+    };
+  };
+
+  generateCampaignGoalInfo = function(goal, cost, clicks) {
+    var count;
+    count = generateCount();
+    return {
+      count: count,
+      cpa: cost / count,
+      cr: 100 * count / clicks,
+      name: goal.name
+    };
+  };
+
+  generateCosts = function(cost, clicks) {
+    var shows;
+    shows = generateShows();
+    return {
+      cost: cost,
+      clicks: clicks,
+      shows: shows,
+      cpc: cost / clicks,
+      ctr: 100 * clicks / shows
+    };
+  };
+
+  generateCampaign = function(id, cost, clicks) {
+    var goal;
+    return {
+      value: "Кампания про продажу " + id,
+      status: random(0, 1) ? 'active' : 'stopped',
+      costs: generateCosts(cost, clicks),
+      goals: (function() {
+        var _i, _len, _ref, _results;
+        _ref = window.bootstrapData.goals_list;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          goal = _ref[_i];
+          _results.push(generateCampaignGoalInfo(goal, cost, clicks));
+        }
+        return _results;
+      })()
+    };
+  };
+
+  window.bootstrapData = {};
+
+  window.bootstrapData.goals_list = (function() {
+    var _i, _results;
+    _results = [];
+    for (id = _i = 0; 0 <= numGoals ? _i < numGoals : _i > numGoals; id = 0 <= numGoals ? ++_i : --_i) {
+      _results.push(generateGoal(id));
+    }
+    return _results;
+  })();
+
+  window.bootstrapData.content = (function() {
+    var _i, _results;
+    _results = [];
+    for (id = _i = 0; 0 <= numCampaigns ? _i < numCampaigns : _i > numCampaigns; id = 0 <= numCampaigns ? ++_i : --_i) {
+      _results.push(generateCampaign(id, generateCost(), generateClicks()));
+    }
+    return _results;
+  })();
+
+  window.bootstrapData.campaign_visibility = {};
+
+  console.log(window.bootstrapData);
+
+}).call(this);
+</script><script src="vendor/js/jquery.js"></script><script src="vendor/js/underscore.js"></script><script src="vendor/js/backbone.js"></script><script src="vendor/js/jade.runtime.js"></script><script src="app/js/utils.js"></script><script src="app/js/widgets.js"></script><script src="app/js/templates.js"></script><script src="app/js/alytics-test.js"></script></body></html>

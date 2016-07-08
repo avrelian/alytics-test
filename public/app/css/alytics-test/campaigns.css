@@ -1,0 +1,39 @@
+.campaigns {
+  width: 1200px;
+  margin: 40px auto;
+  overflow-x: scroll; }
+  .campaigns .campaigns-table {
+    margin: 20px auto;
+    min-width: 1000px; }
+  .campaigns .goal-name {
+    font-size: 12pt;
+    color: #940d3d; }
+  .campaigns .goal-id {
+    font-size: 11pt;
+    color: #878787; }
+
+.no-fold {
+  border: 0;
+  padding: 0; }
+
+.folder {
+  border: 1px dotted gray;
+  padding: 0; }
+  .folder .plus-sign,
+  .folder .minus-sign {
+    position: relative;
+    top: -9px;
+    background: url(../../img/background.png); }
+
+.start-of-block {
+  border-left-width: 2px;
+  border-left-color: #434343; }
+
+.end-of-block {
+  border-right-width: 2px;
+  border-right-color: #434343; }
+
+th:last-of-type.end-of-block,
+td:last-of-type.end-of-block {
+  border-right-width: 1px;
+  border-right-color: #d3d7da; }

@@ -1,0 +1,29 @@
+.campaign {
+  font-size: 11pt;
+  color: #424242;
+  background: white; }
+  .campaign:nth-child(even) {
+    background: whitesmoke; }
+  .campaign.total {
+    background: #e2ebf2; }
+  .campaign .campaign-value {
+    position: relative;
+    white-space: nowrap;
+    max-width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 11pt;
+    color: #577da0;
+    text-align: left; }
+    .campaign .campaign-value .campaign-value-link {
+      color: inherit; }
+    .campaign .campaign-value .edit-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: none;
+      opacity: 0.6; }
+  .campaign .campaign-status {
+    text-align: center; }
+  .campaign.show-edit-button .edit-button {
+    display: block; }
