@@ -19,6 +19,14 @@ class AlyticsTest.App extends Backbone.View
     window.alyticsTestDB.goals = new AlyticsTest.Goal.Collection
     window.alyticsTestDB.goals.reset(window.bootstrapData.goals_list)
 
+    window.alyticsTestDB.user = new AlyticsTest.User.Model(
+      if localStorage.getItem('user')?
+        JSON.parse(localStorage.getItem('user'))
+      else
+        campaign_blocks_visibility: window.bootstrapData.campaign_blocks_visibility
+        campaign_fields_visibility: window.bootstrapData.campaign_fields_visibility
+    )
+
   cacheUI: ->
     @$campaigns = $('.campaigns.placeholder')
 

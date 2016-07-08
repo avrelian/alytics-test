@@ -3,14 +3,12 @@ window.AlyticsTest =
   # данные
   Campaign: {}
   Goal: {}
+  User: {}
 
   # представления
   Views: {
     Campaign: {}
-    Goal: {}
   }
-
-window.localStorage.clear()
 
 $( ->
   window.alyticsTestDB = {}

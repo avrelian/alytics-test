@@ -102,5 +102,3 @@ window.bootstrapData.campaign_fields_visibility =
     count: true
     cpa: true
     cr: true
-
-console.log(window.bootstrapData)

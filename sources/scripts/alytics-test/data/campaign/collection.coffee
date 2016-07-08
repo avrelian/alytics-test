@@ -6,6 +6,11 @@ class AlyticsTest.Campaign.Collection extends Backbone.Collection
 
   initialize: (models, options) ->
 
+  set: ->
+    super
+
+    localStorage.setItem('campaigns', JSON.stringify(@toJSON()))
+
   getTotal: ->
     total = @models.reduce( (subTotal, campaign) ->
       campaignCosts = campaign.attributes.costs

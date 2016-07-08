@@ -27,7 +27,11 @@
       window.alyticsTestDB.campaigns = new AlyticsTest.Campaign.Collection;
       window.alyticsTestDB.campaigns.reset(window.bootstrapData.content);
       window.alyticsTestDB.goals = new AlyticsTest.Goal.Collection;
-      return window.alyticsTestDB.goals.reset(window.bootstrapData.goals_list);
+      window.alyticsTestDB.goals.reset(window.bootstrapData.goals_list);
+      return window.alyticsTestDB.user = new AlyticsTest.User.Model(localStorage.getItem('user') != null ? JSON.parse(localStorage.getItem('user')) : {
+        campaign_blocks_visibility: window.bootstrapData.campaign_blocks_visibility,
+        campaign_fields_visibility: window.bootstrapData.campaign_fields_visibility
+      });
     };
 
     App.prototype.cacheUI = function() {

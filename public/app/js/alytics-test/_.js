@@ -2,13 +2,11 @@
   window.AlyticsTest = {
     Campaign: {},
     Goal: {},
+    User: {},
     Views: {
-      Campaign: {},
-      Goal: {}
+      Campaign: {}
     }
   };
-
-  window.localStorage.clear();
 
   $(function() {
     window.alyticsTestDB = {};

@@ -129,6 +129,9 @@ td:last-of-type.end-of-block {
     background: whitesmoke; }
   .campaign.total {
     background: #e2ebf2; }
+    .campaign.total td {
+      border-top-width: 2px;
+      border-bottom-width: 2px; }
   .campaign .campaign-value {
     position: relative;
     white-space: nowrap;

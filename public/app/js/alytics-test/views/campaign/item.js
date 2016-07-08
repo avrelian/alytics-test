@@ -44,8 +44,9 @@
     };
 
     Item.prototype.serializeData = function() {
-      var costs, data, goal, goals, _i, _len, _ref1;
+      var blocks_visibility, costs, data, goal, goals, _i, _len, _ref1;
       data = this.model.toJSON();
+      blocks_visibility = alyticsTestDB.user.get('campaign_blocks_visibility');
       costs = {
         cpc: utils.formatNumber(data.costs.cpc, this.numFractionalDigits.cpc),
         ctr: utils.formatNumber(data.costs.ctr, this.numFractionalDigits.ctr),
@@ -62,12 +63,12 @@
           cpa: utils.formatNumber(goal.cr, this.numFractionalDigits.cpa),
           cr: utils.formatNumber(goal.cr, this.numFractionalDigits.cr),
           count: utils.formatNumber(goal.count),
-          visible: window.bootstrapData.campaign_blocks_visibility.goals[goal.goal_id]
+          visible: blocks_visibility.goals[goal.goal_id]
         });
       }
       data.goals = goals;
-      data.statusVisible = window.bootstrapData.campaign_blocks_visibility.status;
-      data.costsVisible = window.bootstrapData.campaign_blocks_visibility.costs;
+      data.statusVisible = blocks_visibility.status;
+      data.costsVisible = blocks_visibility.costs;
       data.total = data.value === 'Total' ? 'total' : '';
       return data;
     };

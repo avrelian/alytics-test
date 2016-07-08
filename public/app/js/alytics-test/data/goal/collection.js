@@ -17,6 +17,11 @@
 
     Collection.prototype.initialize = function(models, options) {};
 
+    Collection.prototype.set = function() {
+      Collection.__super__.set.apply(this, arguments);
+      return localStorage.setItem('goals', JSON.stringify(this.toJSON()));
+    };
+
     return Collection;
 
   })(Backbone.Collection);

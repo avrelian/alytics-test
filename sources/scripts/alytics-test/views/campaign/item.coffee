@@ -27,6 +27,8 @@ class AlyticsTest.Views.Campaign.Item extends Backbone.View
   serializeData: ->
     data = @model.toJSON()
 
+    blocks_visibility = alyticsTestDB.user.get('campaign_blocks_visibility')
+
     costs =
       cpc: utils.formatNumber(data.costs.cpc, @numFractionalDigits.cpc)
       ctr: utils.formatNumber(data.costs.ctr, @numFractionalDigits.ctr)
@@ -42,13 +44,13 @@ class AlyticsTest.Views.Campaign.Item extends Backbone.View
         cpa: utils.formatNumber(goal.cr, @numFractionalDigits.cpa)
         cr: utils.formatNumber(goal.cr, @numFractionalDigits.cr)
         count: utils.formatNumber(goal.count)
-        visible: window.bootstrapData.campaign_blocks_visibility.goals[goal.goal_id]
+        visible: blocks_visibility.goals[goal.goal_id]
       )
 
     data.goals = goals
 
-    data.statusVisible = window.bootstrapData.campaign_blocks_visibility.status
-    data.costsVisible = window.bootstrapData.campaign_blocks_visibility.costs
+    data.statusVisible = blocks_visibility.status
+    data.costsVisible = blocks_visibility.costs
 
     data.total = if data.value == 'Total' then 'total' else ''
 

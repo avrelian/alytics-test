@@ -17,6 +17,11 @@
 
     Collection.prototype.initialize = function(models, options) {};
 
+    Collection.prototype.set = function() {
+      Collection.__super__.set.apply(this, arguments);
+      return localStorage.setItem('campaigns', JSON.stringify(this.toJSON()));
+    };
+
     Collection.prototype.getTotal = function() {
       var goal, total;
       total = this.models.reduce(function(subTotal, campaign) {

@@ -11,6 +11,7 @@
       this.onMinusSignClick = __bind(this.onMinusSignClick, this);
       this.onPlusSignClick = __bind(this.onPlusSignClick, this);
       this.appendOne = __bind(this.appendOne, this);
+      this.render = __bind(this.render, this);
       _ref = List.__super__.constructor.apply(this, arguments);
       return _ref;
     }
@@ -47,7 +48,8 @@
     };
 
     List.prototype.serializeData = function() {
-      var data, goal, i, _i, _len, _ref1;
+      var blocks_visibility, data, goal, i, _i, _len, _ref1;
+      blocks_visibility = alyticsTestDB.user.get('campaign_blocks_visibility');
       data = this.collection.toJSON();
       data.goals = data[0].goals.slice(0);
       _ref1 = data.goals;
@@ -55,10 +57,10 @@
         goal = _ref1[i];
         goal.numParams = 3;
         goal.goal_id = window.alyticsTestDB.goals.models[i].attributes.goal_id;
-        goal.visible = window.bootstrapData.campaign_blocks_visibility.goals[goal.goal_id];
+        goal.visible = blocks_visibility.goals[goal.goal_id];
       }
-      data.statusVisible = window.bootstrapData.campaign_blocks_visibility.status;
-      data.costsVisible = window.bootstrapData.campaign_blocks_visibility.costs;
+      data.statusVisible = blocks_visibility.status;
+      data.costsVisible = blocks_visibility.costs;
       return data;
     };
 
@@ -78,32 +80,40 @@
     };
 
     List.prototype.onPlusSignClick = function(event) {
-      var goal, prop;
+      var goal, prop, visibility;
+      visibility = alyticsTestDB.user.get('campaign_blocks_visibility');
       for (prop in window.bootstrapData.campaign_blocks_visibility) {
         if (event.target.classList.contains("" + prop + "-block")) {
-          window.bootstrapData.campaign_blocks_visibility[prop] = true;
+          visibility[prop] = true;
         }
       }
       for (goal in window.bootstrapData.campaign_blocks_visibility.goals) {
         if (event.target.classList.contains("block-" + goal)) {
-          window.bootstrapData.campaign_blocks_visibility.goals[goal] = true;
+          visibility.goals[goal] = true;
         }
       }
+      alyticsTestDB.user.set('campaign_blocks_visibility', visibility, {
+        trigger: true
+      });
       return this.render();
     };
 
     List.prototype.onMinusSignClick = function(event) {
-      var goal, prop;
+      var goal, prop, visibility;
+      visibility = alyticsTestDB.user.get('campaign_blocks_visibility');
       for (prop in window.bootstrapData.campaign_blocks_visibility) {
         if (event.target.classList.contains("" + prop + "-block")) {
-          window.bootstrapData.campaign_blocks_visibility[prop] = false;
+          visibility[prop] = false;
         }
       }
       for (goal in window.bootstrapData.campaign_blocks_visibility.goals) {
         if (event.target.classList.contains("block-" + goal)) {
-          window.bootstrapData.campaign_blocks_visibility.goals[goal] = false;
+          visibility.goals[goal] = false;
         }
       }
+      alyticsTestDB.user.set('campaign_blocks_visibility', visibility, {
+        trigger: true
+      });
       return this.render();
     };
 
